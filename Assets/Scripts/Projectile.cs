@@ -17,7 +17,7 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     private float freezeTime = 10f;
     [SerializeField]
-    private float afterFreezeLifeSpan = 15f;
+    private float afterFreezeLifeSpan = 10f;
 
     [SerializeField]
     private float maxSizeFactor = 3f;
@@ -44,7 +44,6 @@ public class Projectile : MonoBehaviour
         {
             transform.position = assignedTransform.TransformPoint(localHitPoint);
             rb.velocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
         }
     }
 

@@ -477,7 +477,7 @@ public class FirstPersonController : MonoBehaviour
 
             AudioSource source = gameObject.AddComponent<AudioSource>();
             source.clip = jumpSound;
-            source.volume = 0.05f;
+            source.volume = 0.03f;
             source.pitch = 1.1f;
             source.Play();
             Destroy(source, jumpSound.length);
@@ -544,7 +544,8 @@ public class FirstPersonController : MonoBehaviour
             {
                 Debug.Log("Sound");
                 GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
-                nextFootstep += footStepDelay;
+                if(isSprinting) nextFootstep += footStepDelay * 0.7f;
+                else nextFootstep += footStepDelay;
             }
         }
         else

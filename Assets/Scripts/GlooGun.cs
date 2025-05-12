@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
-using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class GlooGun : MonoBehaviour

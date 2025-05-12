@@ -15,10 +15,15 @@ public class Trigger : MonoBehaviour
 
     public AudioClip gunShotSound;
 
+    private bool wasActivated = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag))
         {
+            if (wasActivated) return;
+            wasActivated = true;
+
             Debug.Log($"Object with tag '{targetTag}' entered the trigger.");
             onTriggerEnterEvent.Invoke();
             GetComponent<AudioSource>().PlayOneShot(gunShotSound, 0.7f);
@@ -29,6 +34,9 @@ public class Trigger : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
+            if (!wasActivated) return;
+            wasActivated = false;
+
             Debug.Log($"Object with tag '{targetTag}' exited the trigger.");
             onTriggerEnterExit.Invoke();
         }

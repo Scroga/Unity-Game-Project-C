@@ -117,6 +117,7 @@ public class FirstPersonController : MonoBehaviour
     private bool isCrouched = false;
     private Vector3 originalScale;
 
+
     #endregion
     #endregion
 
@@ -133,6 +134,18 @@ public class FirstPersonController : MonoBehaviour
 
     #endregion
 
+    #region Sound
+    public AudioClip jumpSound;
+    public AudioClip crouchSound;
+
+    public AudioClip footStepSound;
+    public float footStepDelay;
+
+    private float nextFootstep = 0;
+
+
+    #endregion
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -140,7 +153,6 @@ public class FirstPersonController : MonoBehaviour
 
         crosshairObject = GetComponentInChildren<Image>();
 
-        // Set internal variables
         playerCamera.fieldOfView = fov;
         originalScale = transform.localScale;
         jointOriginalPos = joint.localPosition;
@@ -462,6 +474,13 @@ public class FirstPersonController : MonoBehaviour
             float jumpVelocity = Mathf.Sqrt(2 * Physics.gravity.magnitude * gravityMultiplier * jumpPower);
             rb.velocity = new Vector3(rb.velocity.x, jumpVelocity, rb.velocity.z);
             isGrounded = false;
+
+            AudioSource source = gameObject.AddComponent<AudioSource>();
+            source.clip = jumpSound;
+            source.volume = 0.05f;
+            source.pitch = 1.1f;
+            source.Play();
+            Destroy(source, jumpSound.length);
         }
 
         if (isCrouched && !holdToCrouch)
@@ -474,11 +493,10 @@ public class FirstPersonController : MonoBehaviour
     {
         // Stands player up to full height
         // Brings walkSpeed back up to original speed
-        if(isCrouched)
+        if (isCrouched)
         {
             transform.localScale = new Vector3(originalScale.x, originalScale.y, originalScale.z);
             walkSpeed /= speedReduction;
-
             isCrouched = false;
         }
         // Crouches player down to set height
@@ -487,6 +505,13 @@ public class FirstPersonController : MonoBehaviour
         {
             transform.localScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
             walkSpeed *= speedReduction;
+
+            AudioSource source = gameObject.AddComponent<AudioSource>();
+            source.clip = crouchSound;
+            source.volume = 0.08f;
+            source.pitch = 1.1f;
+            source.Play();
+            Destroy(source, crouchSound.length);
 
             isCrouched = true;
         }
@@ -513,6 +538,14 @@ public class FirstPersonController : MonoBehaviour
             }
             // Applies HeadBob movement
             joint.localPosition = new Vector3(jointOriginalPos.x + Mathf.Sin(timer) * bobAmount.x, jointOriginalPos.y + Mathf.Sin(timer) * bobAmount.y, jointOriginalPos.z + Mathf.Sin(timer) * bobAmount.z);
+
+            nextFootstep -= Time.deltaTime;
+            if (nextFootstep <= 0)
+            {
+                Debug.Log("Sound");
+                GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
+                nextFootstep += footStepDelay;
+            }
         }
         else
         {
@@ -637,7 +670,7 @@ public class FirstPersonController : MonoBehaviour
         fpc.useSprintBar = EditorGUILayout.ToggleLeft(new GUIContent("Use Sprint Bar", "Determines if the default sprint bar will appear on screen."), fpc.useSprintBar);
 
         // Only displays sprint bar options if sprint bar is enabled
-        if(fpc.useSprintBar)
+        if (fpc.useSprintBar)
         {
             EditorGUI.indentLevel++;
 
@@ -681,6 +714,8 @@ public class FirstPersonController : MonoBehaviour
         fpc.jumpKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Jump Key", "Determines what key is used to jump."), fpc.jumpKey);
         fpc.jumpPower = EditorGUILayout.Slider(new GUIContent("Jump Power", "Determines how high the player will jump."), fpc.jumpPower, .1f, 20f);
         fpc.gravityMultiplier = EditorGUILayout.Slider(new GUIContent("Gravity Multiplier", "Determines the gravity force."), fpc.gravityMultiplier, .1f, 20f);
+        fpc.jumpSound = (AudioClip)EditorGUILayout.ObjectField(new GUIContent("Jump sound", "The sound will be played when the player jumps"), fpc.jumpSound, typeof(AudioClip), true);
+
         GUI.enabled = true;
 
 
@@ -699,6 +734,7 @@ public class FirstPersonController : MonoBehaviour
         fpc.crouchKey = (KeyCode)EditorGUILayout.EnumPopup(new GUIContent("Crouch Key", "Determines what key is used to crouch."), fpc.crouchKey);
         fpc.crouchHeight = EditorGUILayout.Slider(new GUIContent("Crouch Height", "Determines the y scale of the player object when crouched."), fpc.crouchHeight, .1f, 1);
         fpc.speedReduction = EditorGUILayout.Slider(new GUIContent("Speed Reduction", "Determines the percent 'Walk Speed' is reduced by. 1 being no reduction, and .5 being half."), fpc.speedReduction, .1f, 1);
+        fpc.crouchSound = (AudioClip)EditorGUILayout.ObjectField(new GUIContent("Crouch sound", "The sound will be played when the player crouchs"), fpc.crouchSound, typeof(AudioClip), true);
         GUI.enabled = true;
 
         #endregion
@@ -719,8 +755,11 @@ public class FirstPersonController : MonoBehaviour
         fpc.joint = (Transform)EditorGUILayout.ObjectField(new GUIContent("Camera Joint", "Joint object position is moved while head bob is active."), fpc.joint, typeof(Transform), true);
         fpc.bobSpeed = EditorGUILayout.Slider(new GUIContent("Speed", "Determines how often a bob rotation is completed."), fpc.bobSpeed, 1, 20);
         fpc.bobAmount = EditorGUILayout.Vector3Field(new GUIContent("Bob Amount", "Determines the amount the joint moves in both directions on every axes."), fpc.bobAmount);
-        GUI.enabled = true;
 
+        fpc.footStepSound = (AudioClip)EditorGUILayout.ObjectField(new GUIContent("Foot step sound", "The sound will be played when the player is moving"), fpc.footStepSound, typeof(AudioClip), true);
+        fpc.footStepDelay = EditorGUILayout.Slider(new GUIContent("Foot step delay", "Determines how often a step sound will be played."), fpc.footStepDelay, 0, 10);
+
+        GUI.enabled = true;
         #endregion
 
         //Sets any changes from the prefab

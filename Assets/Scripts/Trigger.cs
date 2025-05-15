@@ -13,20 +13,21 @@ public class Trigger : MonoBehaviour
     [Tooltip("Events to invoke when the object with the tag exits the trigger")]
     public UnityEvent onTriggerEnterExit;
 
-    public AudioClip gunShotSound;
+    public AudioClip activationSound;
 
-    private bool wasActivated = false;
+    private HashSet<GameObject> stayingTargets = new();
 
+    private bool isActivated = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(targetTag))
         {
-            if (wasActivated) return;
-            wasActivated = true;
+            if (isActivated) return;
+            isActivated = true;
+            stayingTargets.Add(other.gameObject);
 
-            Debug.Log($"Object with tag '{targetTag}' entered the trigger.");
             onTriggerEnterEvent.Invoke();
-            GetComponent<AudioSource>().PlayOneShot(gunShotSound, 0.7f);
+            GetComponent<AudioSource>().PlayOneShot(activationSound, 0.7f);
         }
     }
 
@@ -34,11 +35,22 @@ public class Trigger : MonoBehaviour
     {
         if (other.CompareTag(targetTag))
         {
-            if (!wasActivated) return;
-            wasActivated = false;
+            if (!isActivated) return;
+            isActivated = false;
+            stayingTargets.Remove(other.gameObject);
 
-            Debug.Log($"Object with tag '{targetTag}' exited the trigger.");
             onTriggerEnterExit.Invoke();
+        }
+    }
+
+    private void Update()
+    {
+        stayingTargets.RemoveWhere(obj => obj == null || !obj.activeInHierarchy);
+
+        if (isActivated && stayingTargets.Count == 0)
+        {
+            onTriggerEnterExit.Invoke();
+            isActivated = false;
         }
     }
 }

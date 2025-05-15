@@ -542,7 +542,6 @@ public class FirstPersonController : MonoBehaviour
             nextFootstep -= Time.deltaTime;
             if (nextFootstep <= 0)
             {
-                Debug.Log("Sound");
                 GetComponent<AudioSource>().PlayOneShot(footStepSound, 0.7f);
                 if(isSprinting) nextFootstep += footStepDelay * 0.7f;
                 else nextFootstep += footStepDelay;

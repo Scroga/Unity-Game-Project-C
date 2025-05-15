@@ -30,6 +30,7 @@ public class Door : MonoBehaviour
     public void Open() 
     {
         if (IsOpen) return;
+        IsOpen = true;
 
         if (AnimationCoroutine != null)
             StopCoroutine(AnimationCoroutine);
@@ -44,7 +45,6 @@ public class Door : MonoBehaviour
         Vector3 startPosition = transform.position;
 
         float time = 0;
-        IsOpen = true;
         while (time < 1) 
         {
             transform.position = Vector3.Lerp(startPosition, endPosition, time);
@@ -56,6 +56,7 @@ public class Door : MonoBehaviour
     public void Close()
     {
         if (!IsOpen) return;
+        IsOpen = false;
 
         if (AnimationCoroutine != null)
             StopCoroutine(AnimationCoroutine);
@@ -69,7 +70,6 @@ public class Door : MonoBehaviour
         Vector3 startPosition = transform.position;
 
         float time = 0;
-        IsOpen = false;
         while (time < 1)
         {
             transform.position = Vector3.Lerp(startPosition, endPosition, time);

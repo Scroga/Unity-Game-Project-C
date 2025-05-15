@@ -390,7 +390,7 @@ MonoBehaviour:
   SliderDirection: {x: 0, y: 0, z: -1}
   SlideAmount: 1.9
   Speed: 1
-  DoorSound: {fileID: 0}
+  DoorSound: {fileID: 8300000, guid: 6429ef6fc932abf48bd557105f587cfb, type: 3}
 --- !u!82 &6237115352959322051
 AudioSource:
   m_ObjectHideFlags: 0
@@ -401,7 +401,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 6429ef6fc932abf48bd557105f587cfb, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.671
   m_Pitch: 1.64

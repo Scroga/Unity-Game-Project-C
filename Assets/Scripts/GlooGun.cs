@@ -10,6 +10,14 @@ public class GlooGun : MonoBehaviour
     public Transform projectileSpawn;
     public float projectileVelocity = 300;
     public AudioClip gunShotSound;
+    public GameObject particleSource;
+    private ParticleSystem gunShotParticles;
+
+    private void Start()
+    {
+        gunShotParticles = particleSource?.GetComponent<ParticleSystem>();
+    }
+
     void Update()
     {
 
@@ -24,6 +32,7 @@ public class GlooGun : MonoBehaviour
         GameObject projectile = Instantiate(projectilePrefab, projectileSpawn.position, Quaternion.identity);
         projectile.GetComponent<Rigidbody>().AddForce(projectileSpawn.forward.normalized * projectileVelocity, ForceMode.Force);
         GetComponent<AudioSource>().PlayOneShot(gunShotSound, 0.7f);
+        gunShotParticles?.Play();
         transform.DOShakePosition(0.2f, strength: 0.1f, vibrato: 10, randomness: 90, snapping: false, fadeOut: true);
     }
 }

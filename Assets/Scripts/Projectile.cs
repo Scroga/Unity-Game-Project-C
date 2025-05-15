@@ -10,10 +10,12 @@ public class Projectile : MonoBehaviour
     private Vector3 originalScale;
     private List<Projectile> linkedProjectiles = new List<Projectile>();
 
-    private bool isFrozen = false;
-    private bool wasFrozen = false;
+    [HideInInspector]
+    public bool isFrozen = false;
+    [HideInInspector]
+    public bool wasFrozen = false;
 
-    private float wholeLifeSpan = 50f;
+    private float wholeLifeSpan = 30f;
     [SerializeField]
     private float freezeTime = 10f;
     [SerializeField]
@@ -43,7 +45,6 @@ public class Projectile : MonoBehaviour
         if (isFrozen && assignedTransform != null)
         {
             transform.position = assignedTransform.TransformPoint(localHitPoint);
-            rb.velocity = Vector3.zero;
         }
     }
 
@@ -105,7 +106,6 @@ public class Projectile : MonoBehaviour
 
     private void OnDeath()
     {
-        Debug.Log("Dead");
         Destroy(gameObject);
     }
 }

@@ -181,6 +181,16 @@ public class FirstPersonController : MonoBehaviour
             crosshairObject.gameObject.SetActive(false);
         }
 
+        Collider playerCollider = GetComponent<Collider>();
+        if (playerCollider != null)
+        {
+            PhysicMaterial noFrictionMaterial = new PhysicMaterial();
+            noFrictionMaterial.dynamicFriction = 0f;
+            noFrictionMaterial.staticFriction = 0f;
+            noFrictionMaterial.frictionCombine = PhysicMaterialCombine.Minimum;
+            playerCollider.material = noFrictionMaterial;
+        }
+
         #region Sprint Bar
 
         sprintBarCG = GetComponentInChildren<CanvasGroup>();

@@ -30,9 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7911242929961320679}
   - {fileID: 17457495422942521}
-  - {fileID: 2143446374096447331}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 179.966, z: 0}
 --- !u!114 &3726631667842153449
@@ -73,12 +71,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4970454382664712008}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.406, y: -0.661, z: 2.388}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.06519726, y: -0.7040852, z: -0.70632714, w: 0.033398308}
+  m_LocalPosition: {x: 0.0006636275, y: 0.017217334, z: 0.0027592161}
+  m_LocalScale: {x: 0.009657425, y: 0.00961547, z: 0.012343079}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1428815204600386103}
+  m_Father: {fileID: 17457495422942521}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2139553841726625211
 PrefabInstance:
@@ -86,7 +84,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1428815204600386103}
+    m_TransformParent: {fileID: 17457495422942521}
     m_Modifications:
     - target: {fileID: 1000010844420130, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_Name
@@ -94,39 +92,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.9999999
+      value: 0.009615444
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.00961547
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.9999999
+      value: 0.012412331
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.539
+      value: 0.000050130948
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.7227
+      value: 0.015526742
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.906
+      value: 0.002129681
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99775666
+      value: -0.01381213
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0.017765393
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.066945754
+      value: -0.70474154
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: -0.7091073
       objectReference: {fileID: 0}
     - target: {fileID: 4000010197676760, guid: 4edabb1c0dde62743b137378c7d22980, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -251,7 +253,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5849293686012672337, guid: 6b9b0da5ea65e1b4fa86b49fc3b22e1a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2143446374096447331}
+    - targetCorrespondingSourceObject: {fileID: 5849293686012672337, guid: 6b9b0da5ea65e1b4fa86b49fc3b22e1a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7911242929961320679}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6514189891445203947, guid: 6b9b0da5ea65e1b4fa86b49fc3b22e1a, type: 3}
       insertIndex: -1

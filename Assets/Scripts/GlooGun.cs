@@ -33,6 +33,6 @@ public class GlooGun : MonoBehaviour
         projectile.GetComponent<Rigidbody>().AddForce(projectileSpawn.forward.normalized * projectileVelocity, ForceMode.Force);
         GetComponent<AudioSource>().PlayOneShot(gunShotSound, 0.7f);
         gunShotParticles?.Play();
-        transform.DOShakePosition(0.2f, strength: 0.1f, vibrato: 10, randomness: 90, snapping: false, fadeOut: true);
+        transform.DOShakePosition(0.1f, strength: 0.1f, vibrato: 10, snapping: false, fadeOut: true);
     }
 }

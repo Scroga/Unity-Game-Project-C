@@ -34,6 +34,7 @@ public class Projectile : MonoBehaviour
         sizeFactor = Random.Range(minSizeFactor, maxSizeFactor);
         originalScale = transform.localScale * Random.Range(0.7f, 1.3f);
 
+
         transform.rotation = Random.rotation;
         transform.localScale = originalScale;
 
